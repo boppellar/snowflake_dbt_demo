@@ -1,31 +1,41 @@
 version: 2
+
 models:
-  - name: stg_customers
+
+  - name: stg_customer
+    description: "Cleaned Customer Data"
+
     columns:
       - name: customer_id
+        description: "Unique Customer Identifier"
         tests:
-          - not_null
           - unique
-
-  - name: stg_account
-    columns:
-      - name: account_id
-        tests:
-          - not_null
-          - unique
-      - name: customer_id
-        tests:
           - not_null
 
-  - name: stg_transactions
-    columns:
-      - name: transaction_id
+      - name: first_name
+        description: "Customer First Name"
+
+      - name: last_name
+        description: "Customer Last Name"
+
+      - name: email
+        description: "Customer Email Address"
         tests:
           - not_null
-          - unique
-      - name: account_id
-        tests:
-          - not_null
-      - name: amount
+
+      - name: phone
+        description: "Customer Phone Number"
+
+      - name: city
+        description: "Customer City"
+
+      - name: state
+        description: "Customer State"
+
+      - name: country
+        description: "Customer Country"
+
+      - name: status
+        description: "Customer Status"
         tests:
           - not_null

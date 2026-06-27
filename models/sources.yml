@@ -1,17 +1,39 @@
 version: 2
 
 sources:
-  - name: raw
-    database: DBT_DEMO
-    schema: RAW
+  - name: bronze
+    description: "Retail Data Warehouse Bronze Layer"
+
+    database: RETAIL_DWH
+    schema: BRONZE
 
     tables:
-      - name: customers
-      - name: transactions
-      - name: accounts
-  - name: ecommerce
-    database: RAW_DB
-    schema: ECOMMERCE
+      - name: CUSTOMER_RAW
+        description: "Raw customer master data"
 
-    tables:
-      - name: raw_orders
+      - name: PRODUCT_RAW
+        description: "Raw product master data"
+
+      - name: STORE_RAW
+        description: "Raw store master data"
+
+      - name: SUPPLIER_RAW
+        description: "Raw supplier master data"
+
+      - name: EMPLOYEE_RAW
+        description: "Raw employee master data"
+
+      - name: ORDER_HEADER_RAW
+        description: "Raw order header data"
+
+      - name: ORDER_LINE_RAW
+        description: "Raw order line data"
+
+      - name: PAYMENT_RAW
+        description: "Raw payment transactions"
+
+      - name: INVENTORY_RAW
+        description: "Raw inventory data"
+
+      - name: RETURNS_RAW
+        description: "Raw returns data"

@@ -4,6 +4,8 @@
 
 SELECT
 
+    {{ dbt_utils.generate_surrogate_key(['customer_id']) }} AS customer_sk,
+
     customer_id,
     first_name,
     last_name,

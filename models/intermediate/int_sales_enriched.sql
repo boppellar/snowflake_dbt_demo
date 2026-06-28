@@ -2,6 +2,8 @@
 
 select
 
+   ol.order_line_id,
+
     oh.order_id,
     oh.order_date,
     oh.order_status,

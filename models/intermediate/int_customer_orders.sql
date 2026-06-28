@@ -17,7 +17,7 @@ SELECT
     c.state,
     c.country
 
-FROM {{ ref('stg_order_header') }} oh
+FROM {{ ref('stg_order_header') }} AS oh
 
-INNER JOIN {{ ref('stg_customer') }} c
-ON oh.customer_id = c.customer_id
+INNER JOIN {{ ref('stg_customer') }} AS c
+    ON oh.customer_id = c.customer_id

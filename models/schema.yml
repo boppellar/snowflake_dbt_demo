@@ -7,35 +7,65 @@ models:
 
     columns:
       - name: customer_id
-        description: "Unique Customer Identifier"
         tests:
           - unique
           - not_null
 
-      - name: first_name
-        description: "Customer First Name"
-
-      - name: last_name
-        description: "Customer Last Name"
-
       - name: email
-        description: "Customer Email Address"
         tests:
           - not_null
-
-      - name: phone
-        description: "Customer Phone Number"
-
-      - name: city
-        description: "Customer City"
-
-      - name: state
-        description: "Customer State"
-
-      - name: country
-        description: "Customer Country"
 
       - name: status
-        description: "Customer Status"
         tests:
           - not_null
+
+  - name: dim_customer
+    description: "Customer Dimension"
+
+    columns:
+      - name: customer_sk
+        tests:
+          - unique
+          - not_null
+
+      - name: status
+        tests:
+          - accepted_values:
+arguments:
+      values:
+        - Active
+        - Inactive
+
+  - name: dim_product
+    description: "Product Dimension"
+
+    columns:
+      - name: product_sk
+        tests:
+          - unique
+          - not_null
+
+      - name: product_name
+        tests:
+          - not_null
+
+  - name: fact_sales
+    description: "Sales Fact Table"
+
+    columns:
+      - name: order_line_id
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_sk
+        tests:
+          - relationships:
+              column_namelumn_name: ref('dim_customer')
+              argumentsents: customer_sk
+
+      - name: product_sk
+        tests:
+          - relationships:
+              argumentsguments: ref('dim_product')
+              column_namen_name: product_sk

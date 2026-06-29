@@ -29,3 +29,9 @@ models:
     marts:
       +schema: marts
       +materialized: table
+seeds:
+     my_new_project:
+      +schema: LOOKUP
+
+vars:
+  load_days: 7

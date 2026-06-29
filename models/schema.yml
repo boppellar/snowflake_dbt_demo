@@ -31,10 +31,10 @@ models:
       - name: status
         tests:
           - accepted_values:
-arguments:
-      values:
-        - Active
-        - Inactive
+              arguments:
+                values:
+                  - ACTIVE
+                  - INACTIVE
 
   - name: dim_product
     description: "Product Dimension"
@@ -61,11 +61,13 @@ arguments:
       - name: customer_sk
         tests:
           - relationships:
-              column_namelumn_name: ref('dim_customer')
-              argumentsents: customer_sk
+              arguments:
+                to: ref('dim_customer')
+                field: customer_sk
 
       - name: product_sk
         tests:
           - relationships:
-              argumentsguments: ref('dim_product')
-              column_namen_name: product_sk
+              arguments:
+                to: ref('dim_product')
+                field: product_sk

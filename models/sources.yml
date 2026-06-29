@@ -4,12 +4,23 @@ sources:
   - name: bronze
     description: "Retail Data Warehouse Bronze Layer"
 
-    database: RETAIL_DWH
-    schema: BRONZE
+    database: "{{ env_var('DBT_DATABASE') }}"
+    schema: "{{ env_var('DBT_SCHEMA') }}"
 
     tables:
       - name: CUSTOMER_RAW
         description: "Raw customer master data"
+
+        freshness:
+          warn_after:
+            count: 30
+            period: day
+
+          error_after:
+            count: 60
+            period: day
+
+        loaded_at_field: CREATED_DATE
 
       - name: PRODUCT_RAW
         description: "Raw product master data"

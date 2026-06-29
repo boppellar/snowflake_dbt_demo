@@ -1,7 +1,27 @@
 {{ config(
     materialized='incremental',
     incremental_strategy='merge',
-    unique_key='order_line_id'
+    unique_key='order_line_id',
+
+    pre_hook="
+        INSERT INTO RETAIL_DWH.AUDIT.AUDIT_LOG
+        VALUES
+        (
+            'fact_sales',
+            'START',
+            CURRENT_TIMESTAMP()
+        )
+    ",
+
+    post_hook="
+        INSERT INTO RETAIL_DWH.AUDIT.AUDIT_LOG
+        VALUES
+        (
+            'fact_sales',
+            'END',
+            CURRENT_TIMESTAMP()
+        )
+    "
 ) }}
 
 SELECT
@@ -22,7 +42,7 @@ SELECT
     s.payment_method,
     s.payment_status,
 
-    CURRENT_TIMESTAMP() AS load_timestamp
+    {{ add_load_timestamp() }}
 
 FROM {{ ref('int_sales_enriched') }} s
 

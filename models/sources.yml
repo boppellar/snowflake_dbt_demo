@@ -6,7 +6,6 @@ sources:
 
     database: "{{ env_var('DBT_DATABASE') }}"
     schema: "{{ env_var('DBT_SCHEMA') }}"
-
     tables:
       - name: CUSTOMER_RAW
         description: "Raw customer master data"

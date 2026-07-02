@@ -1,7 +1,3 @@
-{{ config(
-    materialized='view'
-) }}
-
 SELECT
 
     CUSTOMER_ID      AS customer_id,
@@ -18,8 +14,8 @@ SELECT
     POSTAL_CODE      AS postal_code,
     CREATED_DATE     AS created_date,
     UPDATED_DATE     AS updated_date,
-    STATUS           AS status
-    age              as age
+    STATUS           AS status,
+    AGE              AS age
 
 FROM {{ source('bronze','CUSTOMER_RAW') }}
 

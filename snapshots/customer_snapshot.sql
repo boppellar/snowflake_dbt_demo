@@ -18,6 +18,7 @@
             'state',
             'country',
             'status'
+            'age'
         ]
     )
 }}

@@ -19,6 +19,7 @@ SELECT
     CREATED_DATE     AS created_date,
     UPDATED_DATE     AS updated_date,
     STATUS           AS status
+    age              as age
 
 FROM {{ source('bronze','CUSTOMER_RAW') }}
 

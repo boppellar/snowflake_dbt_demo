@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: pricing_raw
+    database: USAA_PRICING_RAW
+    schema: PRICING_INDICATIONS
+    tables:
+      - name: raw_pricing_indications
+        description: "Raw pricing indication filings by state/product line"
+
+  - name: competitor_raw
+    database: USAA_PRICING_RAW
+    schema: COMPETITOR_RATES
+    tables:
+      - name: raw_competitor_rates
+        description: "Raw competitor rate/quote data by state/product line"
+        

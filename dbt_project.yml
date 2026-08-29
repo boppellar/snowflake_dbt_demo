@@ -19,19 +19,11 @@ clean-targets:
 models:
   my_new_project:
     staging:
+      +materialized: view
       +schema: staging
-      +materialized: view
-
     intermediate:
+      +materialized: ephemeral
       +schema: intermediate
-      +materialized: view
-
     marts:
-      +schema: marts
       +materialized: table
-seeds:
-     my_new_project:
-      +schema: LOOKUP
-
-vars:
-  load_days: 7
+      +schema: marts

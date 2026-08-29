@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_pricing_indications
+    description: "Cleaned view over raw pricing indication filings"
+    columns:
+      - name: indication_id
+        tests:
+          - unique
+          - not_null
+      - name: state_code
+        tests:
+          - not_null
+
+  - name: stg_competitor_rates
+    description: "Cleaned view over raw competitor rate data"
+    columns:
+      - name: state_code
+        tests:
+          - not_null
+      - name: product_line
+        tests:
+          - not_null

@@ -1,1 +1,0 @@
-select {{sum_of_2_nums(10,2)}}

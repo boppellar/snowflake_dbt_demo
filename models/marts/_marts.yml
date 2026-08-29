@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: fct_pricing_competitor_analysis
+    description: "Curated fact table comparing USAA pricing indications against competitor rate benchmarks, by state and product line"
+    columns:
+      - name: indication_id
+        tests:
+          - not_null
+      - name: market_position
+        tests:
+          - accepted_values:
+              values: ['Above Market', 'Below Market', 'At Market']

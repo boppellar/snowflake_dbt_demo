@@ -1,0 +1,38 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  DBT_PROFILES_DIR: "$CI_PROJECT_DIR/setup"
+
+# Runs on every Merge Request: builds + tests the changed models
+dbt_ci_check:
+  stage: build
+  image: python:3.11-slim
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  before_script:
+    - pip install dbt-snowflake
+  script:
+    - dbt deps || true
+    - dbt build --target ci
+  variables:
+    SNOWFLAKE_ACCOUNT: $SNOWFLAKE_ACCOUNT
+    SNOWFLAKE_USER: $SNOWFLAKE_USER
+    SNOWFLAKE_PASSWORD: $SNOWFLAKE_PASSWORD
+
+# Runs only when merged into main: deploys to production
+dbt_deploy_prod:
+  stage: deploy
+  image: python:3.11-slim
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  before_script:
+    - pip install dbt-snowflake
+  script:
+    - dbt deps || true
+    - dbt build --target prod
+  variables:
+    SNOWFLAKE_ACCOUNT: $SNOWFLAKE_ACCOUNT
+    SNOWFLAKE_USER: $SNOWFLAKE_USER
+    SNOWFLAKE_PASSWORD: $SNOWFLAKE_PASSWORD

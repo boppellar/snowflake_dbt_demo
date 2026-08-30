@@ -1,0 +1,34 @@
+# Copy to ~/.dbt/profiles.yml and fill in credentials (or use env vars)
+usaa_pricing_competitor:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: TRANSFORMER
+      database: USAA_PRICING_STAGING
+      warehouse: USAA_PRICING_WH
+      schema: STAGING
+      threads: 4
+    ci:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: TRANSFORMER
+      database: USAA_PRICING_STAGING
+      warehouse: USAA_PRICING_WH
+      schema: CI_{{ env_var('CI_MERGE_REQUEST_IID', 'local') }}
+      threads: 4
+    prod:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: TRANSFORMER
+      database: USAA_PRICING_ANALYTICS
+      warehouse: USAA_PRICING_WH
+      schema: MARTS
+      threads: 8
